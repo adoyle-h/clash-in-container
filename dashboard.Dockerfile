@@ -1,4 +1,4 @@
-FROM node:18-alpine3.17
+FROM node:18-alpine3.17 as builder
 
 WORKDIR /root
 
@@ -8,7 +8,7 @@ RUN <<EOF
 EOF
 
 RUN apk add --no-cache \
-    bash git
+  bash git
 
 RUN <<EOF
   git clone --depth 1 --single-branch --progress https://ghproxy.com/https://github.com/Dreamacro/clash-dashboard.git
@@ -22,7 +22,12 @@ RUN <<EOF
   npm run build
 EOF
 
+FROM joseluisq/static-web-server:2-alpine
+
+COPY --from=builder /root/clash-dashboard/dist /root/public
+
+WORKDIR /root
 LABEL maintainer="ADoyle <adoyle.h@gmail.com>"
 ENV TZ=Asia/Shanghai
-ENTRYPOINT ["/bin/bash", "-c"]
-CMD ["npm exec --prefix /root/clash-dashboard vite -- preview --port 8080 --host 0.0.0.0 /root/clash-dashboard"]
+ENTRYPOINT ["/bin/sh", "-c"]
+CMD ["static-web-server --port 8080 --root /root/public"]
