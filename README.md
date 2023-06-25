@@ -25,4 +25,5 @@ Run clash in container.
 
 ## Images
 
-- Build image: `docker compose build`
+- Build image for local arch: `docker compose build`
+- Build and push images for multi arch: `make build tag=0.1.0`

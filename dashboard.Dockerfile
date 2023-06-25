@@ -28,6 +28,7 @@ COPY --from=builder /root/clash-dashboard/dist /root/public
 
 WORKDIR /root
 LABEL maintainer="ADoyle <adoyle.h@gmail.com>"
+LABEL description="The dashboard for clash"
 ENV TZ=Asia/Shanghai
 ENTRYPOINT ["/bin/sh", "-c"]
 CMD ["static-web-server --port 8080 --root /root/public"]
