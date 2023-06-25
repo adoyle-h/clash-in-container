@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+  clash:
+    image: ghcr.io/dreamacro/clash
+    restart: always
+    volumes:
+      - ./config.yaml:/root/.config/clash/config.yaml:ro
+      # - ./ui:/ui:ro # dashboard volume
+    ports:
+      - "7890:7890"
+      - "7891:7891"
+      - "19090:9090" # The External Controller (RESTful API)
+    network_mode: "bridge"
+
+  dashboard:
+    image: adoyle/clash-dashboard:0.1.0
+    build:
+      context: .
+      dockerfile: ./dashboard.Dockerfile
+    restart: always
+    ports:
+      - "19091:8080"
+    network_mode: "bridge"
