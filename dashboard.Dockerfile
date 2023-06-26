@@ -18,7 +18,8 @@ RUN <<EOF
   set -o errexit -o nounset -o pipefail
   cd clash-dashboard
   npm config set registry https://registry.npm.taobao.org/
-  npm install --force
+  npm i -g pnpm
+  pnpm install
   npm run build
 EOF
 
