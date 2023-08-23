@@ -3,7 +3,7 @@ version: "3.9"
 services:
   clash:
     image: ghcr.io/dreamacro/clash
-    restart: always
+    restart: unless-stopped
     volumes:
       - ./config.yaml:/root/.config/clash/config.yaml:ro
       # - ./ui:/ui:ro # dashboard volume
@@ -18,7 +18,7 @@ services:
     build:
       context: .
       dockerfile: ./dashboard.Dockerfile
-    restart: always
+    restart: unless-stopped
     ports:
       - "19091:8080"
     network_mode: "bridge"
