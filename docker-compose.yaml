@@ -14,7 +14,7 @@ services:
     network_mode: "bridge"
 
   dashboard:
-    image: adoyle/clash-dashboard:0.1.0
+    image: adoyle/clash-dashboard:0.2.0
     build:
       context: .
       dockerfile: ./dashboard.Dockerfile
@@ -22,3 +22,10 @@ services:
     ports:
       - "19091:8080"
     network_mode: "bridge"
+
+  config_converter:
+    image: tindy2013/subconverter:latest
+    restart: unless-stopped
+    network_mode: "bridge"
+    ports:
+      - "19092:25500"
