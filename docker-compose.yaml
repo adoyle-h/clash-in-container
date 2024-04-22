@@ -2,10 +2,13 @@ version: "3.9"
 
 services:
   clash:
-    image: ghcr.io/dreamacro/clash
+    image: adoyle/clash-meta
+    build:
+      context: .
+      dockerfile: ./meta.Dockerfile
     restart: unless-stopped
     volumes:
-      - ./config.yaml:/root/.config/clash/config.yaml:ro
+      - ./config.yaml:/root/.config/mihomo/config.yaml:ro
       # - ./ui:/ui:ro # dashboard volume
     ports:
       - "7890:7890"
@@ -14,13 +17,10 @@ services:
     network_mode: "bridge"
 
   dashboard:
-    image: adoyle/clash-dashboard:0.2.0
-    build:
-      context: .
-      dockerfile: ./dashboard.Dockerfile
+    image: ghcr.io/metacubex/metacubexd
     restart: unless-stopped
     ports:
-      - "19091:8080"
+      - "19091:80"
     network_mode: "bridge"
 
   config_converter:

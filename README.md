@@ -1,10 +1,10 @@
 # Clash in Container
 
-Run clash in container.
+Run clash-meta in container.
 
 ## Usage
 
-1. Copy `config.yaml` to project root directory.
+1. Copy `config.yaml` to project root directory. The config refer to https://wiki.metacubex.one/config/
 2. Run `docker compose up`.
 3. Visit `http://ip:19091` to view config.
 
