@@ -1,14 +1,16 @@
-FROM alpine:3.19.1
+FROM alpine:3.21.3
 
 WORKDIR /root
 
-ARG CLASH_VERSION=v1.18.3
 ARG TARGETPLATFORM
+ARG CLASH_VERSION=1.18.3
+ARG ALPINE_PROXY=mirrors.tuna.tsinghua.edu.cn
+ARG GITHUB_PROXY=''
 
 ENV TZ=Asia/Shanghai
 
 RUN <<EOF
-  sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
+  sed -i "s/dl-cdn.alpinelinux.org/$ALPINE_PROXY/g" /etc/apk/repositories
   apk update
   apk add --no-cache bash curl gzip
   rm -rf /var/cache/apk/*
@@ -19,26 +21,19 @@ RUN <<EOF
   case "$TARGETPLATFORM" in
     linux/amd64)
       meta_type=amd64
-      tini_type=amd64
     ;;
     linux/arm64)
       meta_type=arm64
-      tini_type=arm64
     ;;
     linux/arm/v*)
       meta_type=armv7
-      tini_type=armhf
     ;;
     *)
       meta_type=unknown-arch
-      tini_type=unknown-arch
     ;;
   esac
 
-  curl -Lfo /tini "https://mirror.ghproxy.com/https://github.com/krallin/tini/releases/latest/download/tini-static-$tini_type"
-  chmod +x /tini
-
-  curl -Lfo ./clash.gz "https://mirror.ghproxy.com/https://github.com/MetaCubeX/mihomo/releases/latest/download/mihomo-linux-$meta_type-$CLASH_VERSION.gz"
+  curl -Lfo ./clash.gz "${GITHUB_PROXY}https://github.com/MetaCubeX/mihomo/releases/latest/download/mihomo-linux-$meta_type-v$CLASH_VERSION.gz"
   gunzip ./clash.gz
   rm -f ./clash.gz
   chmod +x ./clash
@@ -46,6 +41,6 @@ EOF
 
 LABEL maintainer="ADoyle <adoyle.h@gmail.com>"
 LABEL description="The clash meta"
+LABEL clash_meta_version=$CLASH_VERSION
 
-ENTRYPOINT ["/tini", "--"]
 CMD ["/root/clash"]

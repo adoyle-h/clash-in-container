@@ -6,6 +6,7 @@ services:
     build:
       context: .
       dockerfile: ./meta.Dockerfile
+    init: true
     restart: unless-stopped
     volumes:
       - ./config.yaml:/root/.config/mihomo/config.yaml:ro

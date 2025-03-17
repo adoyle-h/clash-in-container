@@ -26,4 +26,25 @@ Run clash-meta in container.
 ## Images
 
 - Build image for local arch: `docker compose build`
-- Build and push images for multi arch: `make build tag=0.1.0`
+- Build and push images for multi arch: `just build 1.19.3`
+  - 1.19.3 is clash meta version.
+  - Install [just](https://github.com/casey/just) before build.
+
+## Suggestion, Bug Reporting, Contributing
+
+**Before opening new Issue/Discussion/PR and posting any comments**, please read [Contributing Guidelines](https://gcg.adoyle.me/CONTRIBUTING).
+
+## Copyright and License
+
+Copyright 2023-2025 ADoyle (adoyle.h@gmail.com) All Rights Reserved.
+The project is licensed under the **Apache License Version 2.0**.
+
+See the [LICENSE][] file for the specific language governing permissions and limitations under the License.
+
+See the [NOTICE][] file distributed with this work for additional information regarding copyright ownership.
+
+
+<!-- links -->
+
+[LICENSE]: ./LICENSE
+[NOTICE]: ./NOTICE
