@@ -33,7 +33,7 @@ RUN <<EOF
     ;;
   esac
 
-  curl -Lfo ./clash.gz "${GITHUB_PROXY}https://github.com/MetaCubeX/mihomo/releases/latest/download/mihomo-linux-$meta_type-v$CLASH_VERSION.gz"
+  curl -Lfo ./clash.gz "${GITHUB_PROXY}https://github.com/MetaCubeX/mihomo/releases/download/v${CLASH_VERSION}/mihomo-linux-$meta_type-v$CLASH_VERSION.gz"
   gunzip ./clash.gz
   rm -f ./clash.gz
   chmod +x ./clash
