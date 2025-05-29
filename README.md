@@ -26,7 +26,7 @@ Run clash-meta in container.
 ## Images
 
 - Build image for local arch: `docker compose build`
-- Build and push images for multi arch: `just build 1.19.3`
+- Build and push images for multi arch: `just build 1.19.3` or `GITHUB_PROXY=https://ghfast.top/ just build 1.19.3`
   - 1.19.3 is clash meta version.
   - Install [just](https://github.com/casey/just) before build.
 
