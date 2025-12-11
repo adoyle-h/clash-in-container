@@ -14,6 +14,7 @@ Run clash-meta in container.
 - 7891: socks port
 - 19090: The external controller port (RESTful API)
 - 19091: The dashboard port
+- 19092: The subconverter port
 
 ## Config
 
@@ -25,10 +26,16 @@ Run clash-meta in container.
 
 ## Images
 
+### Local Building
+
 - Build image for local arch: `docker compose build`
 - Build and push images for multi arch: `just build 1.19.3` or `GITHUB_PROXY=https://ghfast.top/ just build 1.19.3`
   - 1.19.3 is clash meta version.
   - Install [just](https://github.com/casey/just) before build.
+
+### Building by CI
+
+- Push git tag like `v1.19.3` to github. The github action will build and push images automatically.
 
 ## Suggestion, Bug Reporting, Contributing
 
