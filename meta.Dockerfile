@@ -25,6 +25,15 @@ RUN <<EOF
     linux/arm64)
       meta_type=arm64
     ;;
+    linux/arm/v7)
+      meta_type=armv7
+    ;;
+    linux/arm/v6)
+      meta_type=armv6
+    ;;
+    linux/arm/v5)
+      meta_type=armv5
+    ;;
     linux/arm/v*)
       meta_type=armv7
     ;;
